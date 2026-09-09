@@ -2,94 +2,172 @@
 <html lang="th">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, viewport-fit=cover">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="color-scheme" content="light">
+<meta name="theme-color" content="#1FA65A">
 <title>ส.แสงนวล ผลไม้ — สต็อก & การขาย</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Sarabun:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 <style>
 :root{
-  --bg:#f3f5f4; --card:#fff; --ink:#17211d; --muted:#6a7a72; --line:#e4eae6;
-  --primary:#1a8a4c; --primary-d:#12673a; --accent:#e9f6ef;
-  --danger:#c8382f; --warn:#b5730a; --blue:#2563eb;
-  --r:14px; --shadow:0 1px 2px rgba(0,0,0,.06),0 6px 20px rgba(0,0,0,.05);
+  --bg:#fff8f0; --card:#ffffff; --ink:#26201a; --muted:#927c69;
+  --line:#f2e6d8; --line2:#e9d8c4;
+  --green:#1FA65A; --green-d:#127a41; --green-soft:#e6f7ee;
+  --mango:#FB8B24; --mango-d:#dd7410; --mango-soft:#fff0df;
+  --berry:#EA3E5C; --berry-soft:#ffe7ea;
+  --lemon:#FFC633;
+  --danger:#e23b3b; --warn:#c67d0a;
+  --r:16px; --r-sm:12px;
+  --sh-sm:0 1px 2px rgba(70,45,20,.06);
+  --sh:0 2px 6px rgba(70,45,20,.05),0 12px 28px rgba(70,45,20,.07);
+  --sh-lg:0 10px 34px rgba(70,45,20,.16);
 }
 *{box-sizing:border-box}
 html,body{margin:0;padding:0}
-body{font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent}
-header{position:sticky;top:0;z-index:10;background:var(--primary);color:#fff;padding:calc(env(safe-area-inset-top) + 11px) 15px 11px;display:flex;align-items:center;gap:9px}
-header h1{font-size:16px;margin:0;font-weight:700;flex:1;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
-.dot{width:9px;height:9px;border-radius:50%;background:#ffd23f;flex:0 0 auto}
-.dot.ok{background:#8affaa}.dot.err{background:#ff7a70}
-header button{background:rgba(255,255,255,.18);border:0;color:#fff;font:inherit;font-size:14px;padding:6px 11px;border-radius:9px}
-main{padding:13px 13px 92px;max-width:660px;margin:0 auto}
-.screen{display:none}.screen.active{display:block}
-.card{background:var(--card);border-radius:var(--r);box-shadow:var(--shadow);padding:14px;margin-bottom:12px}
-h2{font-size:14px;margin:0 0 10px;color:var(--muted);font-weight:700;letter-spacing:.02em}
-label{display:block;font-size:12.5px;color:var(--muted);margin:9px 0 4px;font-weight:600}
-input,select,textarea{width:100%;font:inherit;padding:10px 11px;border:1px solid var(--line);border-radius:10px;background:#fff;color:var(--ink)}
-input[readonly]{background:#f4f7f5;color:var(--muted)}
-textarea{resize:vertical;min-height:92px;line-height:1.6}
-code{background:#eef2f0;padding:1px 5px;border-radius:5px;font-size:12.5px}
-input:focus,select:focus{outline:2px solid var(--accent);border-color:var(--primary)}
-.row{display:flex;gap:8px}.row>*{flex:1;min-width:0}
-.btn{display:block;width:100%;text-align:center;background:var(--primary);color:#fff;border:0;padding:13px;border-radius:11px;font-weight:700;font-size:16px}
-.btn:active{background:var(--primary-d)}
-.btn.sec{background:var(--accent);color:var(--primary-d)}
-.btn.ghost{background:#fff;border:1px solid var(--line);color:var(--ink)}
-.btn.danger{background:var(--danger)}
-.btn.sm{padding:8px 11px;font-size:13.5px;width:auto;font-weight:600}
-.seg{display:flex;border:1px solid var(--line);border-radius:11px;overflow:hidden}
-.seg button{flex:1;background:#fff;border:0;padding:10px 4px;font:inherit;font-size:14px;color:var(--muted)}
-.seg button.on{background:var(--primary);color:#fff;font-weight:700}
-.pill{display:inline-block;font-size:11.5px;padding:1px 8px;border-radius:999px;background:var(--accent);color:var(--primary-d);font-weight:600}
-.pill.low{background:#fdeae8;color:var(--danger)}
-.pill.due{background:#fff3e0;color:var(--warn)}
-.item{display:flex;align-items:flex-start;gap:10px;padding:11px 0;border-bottom:1px solid var(--line)}
+body{font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;background:var(--bg);color:var(--ink);font-size:16px;line-height:1.5;-webkit-tap-highlight-color:transparent;-webkit-text-size-adjust:100%}
+
+header{position:sticky;top:0;z-index:20;color:#fff;display:flex;align-items:center;gap:11px;
+  padding:calc(env(safe-area-inset-top) + 14px) 16px 15px;
+  background:linear-gradient(135deg,#1FA65A 0%,#16b06a 45%,#0EA59B 100%);
+  border-radius:0 0 22px 22px;box-shadow:0 8px 22px rgba(20,120,66,.28)}
+.brandmark{width:38px;height:38px;border-radius:12px;background:rgba(255,255,255,.20);display:grid;place-items:center;font-size:21px;flex:0 0 auto}
+.brandwrap{flex:1;min-width:0}
+header h1{font-size:16.5px;margin:0;font-weight:800;line-height:1.15;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.brandsub{font-size:11px;opacity:.9;font-weight:500;margin-top:1px}
+.dot{width:9px;height:9px;border-radius:50%;background:var(--lemon);box-shadow:0 0 0 3px rgba(255,255,255,.22);flex:0 0 auto}
+.dot.ok{background:#5fe38f}.dot.err{background:#ff7d72}
+.hbtn{background:rgba(255,255,255,.18);border:0;color:#fff;font-family:inherit;font-size:13px;font-weight:700;padding:8px 13px;border-radius:999px;cursor:pointer;touch-action:manipulation}
+.hbtn:active{background:rgba(255,255,255,.32)}
+
+main{padding:15px 13px 104px;max-width:680px;margin:0 auto}
+.screen{display:none}
+.screen.active{display:block;animation:fade .22s ease}
+@keyframes fade{from{opacity:0;transform:translateY(5px)}to{opacity:1;transform:none}}
+
+.card{background:var(--card);border-radius:var(--r);box-shadow:var(--sh);padding:15px;margin-bottom:13px;border:1px solid #fbf1e4}
+h2{font-size:14.5px;margin:0 0 12px;color:var(--ink);font-weight:800;display:flex;align-items:center;gap:7px;letter-spacing:.01em}
+label{display:block;font-size:12px;color:var(--muted);margin:10px 0 5px;font-weight:700}
+
+input,select,textarea{width:100%;font-family:inherit;font-size:16px;padding:11px 12px;border:1.5px solid var(--line2);border-radius:var(--r-sm);background:#fffdfa;color:var(--ink);transition:border-color .15s,box-shadow .15s}
+input::placeholder,textarea::placeholder{color:#c9b8a4}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--green);box-shadow:0 0 0 3px var(--green-soft)}
+input[readonly]{background:#f6f0e8;color:var(--muted)}
+textarea{resize:vertical;min-height:96px;line-height:1.6}
+select{appearance:none;-webkit-appearance:none;padding-right:34px;
+  background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23927c69' stroke-width='2.6' stroke-linecap='round' stroke-linejoin='round'><polyline points='6 9 12 15 18 9'/></svg>");
+  background-repeat:no-repeat;background-position:right 11px center}
+code{background:var(--mango-soft);padding:2px 6px;border-radius:6px;font-size:12px;color:var(--mango-d);font-weight:700}
+
+.row{display:flex;gap:9px}.row>*{flex:1;min-width:0}
+
+.btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;text-align:center;
+  background:linear-gradient(135deg,var(--green),#18b567);color:#fff;border:0;
+  padding:14px;border-radius:13px;font-weight:800;font-size:16px;font-family:inherit;cursor:pointer;
+  box-shadow:0 6px 16px rgba(31,166,90,.28);transition:transform .08s,box-shadow .15s,filter .15s;touch-action:manipulation}
+.btn:active{transform:translateY(1px) scale(.995);box-shadow:0 3px 10px rgba(31,166,90,.26)}
+.btn:disabled{filter:grayscale(.4) opacity(.7)}
+.btn.sec{background:linear-gradient(135deg,var(--mango),#ffa645);box-shadow:0 6px 16px rgba(251,139,36,.28)}
+.btn.ghost{background:#fff;border:1.5px solid var(--line2);color:var(--ink);box-shadow:var(--sh-sm);font-weight:700}
+.btn.ghost:active{background:#faf3ea}
+.btn.danger{background:linear-gradient(135deg,#e23b3b,#f2564a);box-shadow:0 6px 16px rgba(226,59,59,.26)}
+.btn.sm{width:auto;padding:9px 13px;font-size:13px;font-weight:700;border-radius:10px;box-shadow:none;gap:4px}
+
+.stats{display:flex;gap:11px;margin-bottom:13px}
+.stat{flex:1;border-radius:var(--r);padding:14px;color:#fff;box-shadow:var(--sh);position:relative;overflow:hidden}
+.stat::after{content:"";position:absolute;right:-16px;top:-16px;width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.15)}
+.stat-sales{background:linear-gradient(135deg,#FB8B24,#ff6a3c)}
+.stat-profit{background:linear-gradient(135deg,#1FA65A,#0EA59B)}
+.stat-k{font-size:12px;opacity:.95;font-weight:700}
+.stat-v{font-size:23px;font-weight:800;margin-top:3px;letter-spacing:-.4px;font-variant-numeric:tabular-nums;position:relative}
+.stat-v small{font-size:13px;font-weight:700;opacity:.85}
+
+.seg{display:flex;gap:4px;background:#f6ede0;border-radius:12px;padding:4px}
+.seg button{flex:1;background:transparent;border:0;padding:9px 2px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--muted);border-radius:9px;cursor:pointer;white-space:nowrap;transition:all .15s}
+.seg button.on{background:linear-gradient(135deg,var(--green),#18b567);color:#fff;box-shadow:0 3px 9px rgba(31,166,90,.3)}
+
+.pill{display:inline-flex;align-items:center;font-size:11px;padding:2px 9px;border-radius:999px;background:var(--green-soft);color:var(--green-d);font-weight:800;vertical-align:middle}
+.pill.low{background:#ffe7ea;color:#c31d3b}
+.pill.due{background:var(--mango-soft);color:#b5610a}
+
+.item{display:flex;align-items:center;gap:12px;padding:12px 0;border-bottom:1px solid var(--line)}
 .item:last-child{border-bottom:0}
 .item .grow{flex:1;min-width:0}
-.item .name{font-weight:600}
-.item .sub{font-size:12.5px;color:var(--muted);margin-top:1px}
-.big{font-size:21px;font-weight:700;line-height:1.2}
+.item .name{font-weight:700;font-size:14.5px}
+.item .sub{font-size:12px;color:var(--muted);margin-top:2px;line-height:1.45}
+.ava{width:40px;height:40px;border-radius:13px;flex:0 0 auto;display:grid;place-items:center;font-weight:800;font-size:17px;color:#fff;box-shadow:var(--sh-sm)}
+.prow{display:flex;align-items:center;gap:12px;padding:13px 0 10px}
+.pacts{display:flex;gap:6px;padding-bottom:13px;border-bottom:1px solid var(--line)}
+.pacts:last-child{border-bottom:0}
+.pacts .btn{flex:1;padding:10px 4px}
+
+.big{font-size:20px;font-weight:800;line-height:1.15;font-variant-numeric:tabular-nums}
 .muted{color:var(--muted)}.right{text-align:right}
-table{width:100%;border-collapse:collapse;font-size:13.5px}
-th,td{padding:7px 5px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+
+table{width:100%;border-collapse:collapse;font-size:13px;font-variant-numeric:tabular-nums}
+th,td{padding:9px 6px;border-bottom:1px solid var(--line);text-align:right;white-space:nowrap}
+th{font-size:11px;color:var(--muted);font-weight:800}
 th:first-child,td:first-child{text-align:left;white-space:normal}
-tr.tot td{font-weight:700;border-top:2px solid var(--line);border-bottom:0}
-.cartline{border:1px solid var(--line);border-radius:11px;padding:10px;margin-bottom:9px;background:#fcfdfc}
-.calc{font-size:12.5px;color:var(--muted);margin-top:6px}
-.calc b{color:var(--ink)}
-nav{position:fixed;bottom:0;left:0;right:0;background:#fff;border-top:1px solid var(--line);display:flex;padding-bottom:env(safe-area-inset-bottom);z-index:10}
-nav button{flex:1;background:0;border:0;padding:8px 4px 9px;font:inherit;font-size:11px;color:var(--muted);display:flex;flex-direction:column;align-items:center;gap:2px}
-nav button.on{color:var(--primary);font-weight:700}
-nav .ic{font-size:19px;line-height:1}
-.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:82px;background:#17211d;color:#fff;padding:10px 16px;border-radius:10px;font-size:14px;z-index:50;max-width:90%;text-align:center;box-shadow:var(--shadow)}
-.toast.err{background:var(--danger)}
-dialog{border:0;border-radius:16px;padding:15px;width:min(94vw,430px);box-shadow:var(--shadow);color:var(--ink)}
-dialog::backdrop{background:rgba(0,0,0,.4)}
-.hint{font-size:12px;color:var(--muted);margin-top:6px;line-height:1.45}
-.grp-head{font-weight:700;margin:12px 0 3px;font-size:14px}
+tr.tot td{font-weight:800;border-top:2px solid var(--line2);border-bottom:0}
+
+.cartline{border:1.5px solid var(--line2);border-left:4px solid var(--mango);border-radius:12px;padding:11px;margin-bottom:10px;background:#fffdf8}
+.calc{font-size:12px;color:var(--muted);margin-top:8px;background:#f6ede0;border-radius:9px;padding:7px 10px;line-height:1.55}
+.calc b{color:var(--green-d);font-weight:800}
+
+.billbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin:15px 0 11px;padding:12px 14px;
+  background:linear-gradient(135deg,var(--green-soft),#eafaf1);border:1.5px dashed #a9e2c1;border-radius:13px}
+.billbar span{font-weight:800;color:var(--green-d);font-size:13px}
+.billbar strong{font-size:22px;font-weight:800;color:var(--green-d);font-variant-numeric:tabular-nums}
+
+nav{position:fixed;bottom:0;left:0;right:0;z-index:20;display:flex;gap:4px;
+  padding:6px 6px calc(env(safe-area-inset-bottom) + 6px);
+  background:rgba(255,253,250,.94);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);
+  border-top:1px solid var(--line);box-shadow:0 -4px 20px rgba(70,45,20,.07)}
+nav button{flex:1;background:0;border:0;padding:7px 4px;font-family:inherit;font-size:10.5px;font-weight:700;color:var(--muted);
+  display:flex;flex-direction:column;align-items:center;gap:3px;border-radius:13px;cursor:pointer;transition:all .15s}
+nav button .ic{font-size:20px;line-height:1;transition:transform .15s}
+nav button.on{color:var(--green-d);background:var(--green-soft)}
+nav button.on .ic{transform:translateY(-1px) scale(1.12)}
+
+.toast{position:fixed;left:50%;transform:translateX(-50%);bottom:94px;background:#2b2118;color:#fff;
+  padding:12px 18px;border-radius:12px;font-size:13.5px;font-weight:700;z-index:60;max-width:88%;text-align:center;box-shadow:var(--sh-lg)}
+.toast.err{background:linear-gradient(135deg,#e23b3b,#f2564a)}
+
+dialog{border:0;border-radius:20px;padding:18px;width:min(94vw,440px);box-shadow:var(--sh-lg);color:var(--ink);background:var(--card)}
+dialog::backdrop{background:rgba(38,32,26,.45)}
+dialog[open]{animation:pop .18s ease-out}
+@keyframes pop{from{opacity:0;transform:translateY(8px) scale(.97)}to{opacity:1;transform:none}}
+
+.hint{font-size:11.5px;color:var(--muted);margin-top:8px;line-height:1.5}
 </style>
 </head>
 <body>
 <header>
-  <h1>ส.แสงนวล ผลไม้</h1>
+  <div class="brandmark">🍊</div>
+  <div class="brandwrap">
+    <h1>ส.แสงนวล ผลไม้</h1>
+    <div class="brandsub">สต็อก &amp; บันทึกการขาย</div>
+  </div>
   <span class="dot" id="dot"></span>
-  <button id="btnRefresh">รีเฟรช</button>
+  <button class="hbtn" id="btnRefresh">↻ รีเฟรช</button>
 </header>
 
 <main>
   <!-- ============ ขาย ============ -->
   <section class="screen active" id="s-sell">
-    <div class="card">
-      <div class="row">
-        <div><div class="muted" style="font-size:12.5px">ยอดขายวันนี้</div><div class="big" id="tToday">0</div></div>
-        <div class="right"><div class="muted" style="font-size:12.5px">กำไรวันนี้</div><div class="big" id="tProfit" style="color:var(--primary)">0</div></div>
+    <div class="stats">
+      <div class="stat stat-sales">
+        <div class="stat-k">ยอดขายวันนี้</div>
+        <div class="stat-v"><span id="tToday">0</span> <small>฿</small></div>
+      </div>
+      <div class="stat stat-profit">
+        <div class="stat-k">กำไรวันนี้</div>
+        <div class="stat-v"><span id="tProfit">0</span> <small>฿</small></div>
       </div>
     </div>
 
     <div class="card">
-      <h2>บันทึกการขาย / ออกบิล</h2>
+      <h2>🧾 บันทึกการขาย / ออกบิล</h2>
       <div class="row">
         <div><label>รอบ</label><input id="bRound" list="lRound" placeholder="รอบเช้า" autocomplete="off"></div>
         <div><label>ปลายทาง / ตลาด</label><input id="bDest" list="lDest" placeholder="ตลาดไท" autocomplete="off"></div>
@@ -111,22 +189,22 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
         </div>
       </div>
 
-      <label style="margin-top:12px">รายการสินค้า</label>
+      <label style="margin-top:14px">รายการสินค้า</label>
       <div id="lines"></div>
-      <button class="btn ghost sm" id="addLine" style="width:100%;margin-top:2px">+ เพิ่มรายการ</button>
+      <button class="btn ghost sm" id="addLine" style="width:100%;margin-top:2px">＋ เพิ่มรายการ</button>
 
       <label>หมายเหตุ</label>
       <input id="bNote" placeholder="(ไม่บังคับ)">
 
-      <div class="row" style="align-items:center;margin:13px 0 5px">
-        <div class="muted">ยอดรวมบิล</div>
-        <div class="right big" id="billTot">0</div>
+      <div class="billbar">
+        <span>ยอดรวมบิล</span>
+        <strong><span id="billTot">0</span> ฿</strong>
       </div>
-      <button class="btn" id="saveSale">บันทึกการขาย</button>
+      <button class="btn" id="saveSale">💾 บันทึกการขาย</button>
     </div>
 
     <div class="card">
-      <h2>บิลวันนี้</h2>
+      <h2>📋 บิลวันนี้</h2>
       <div id="todayList"><div class="muted">— ยังไม่มีรายการ —</div></div>
     </div>
   </section>
@@ -135,13 +213,13 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
   <section class="screen" id="s-stock">
     <div class="card">
       <div class="row" style="align-items:center">
-        <h2 style="margin:0">สต็อกสินค้า</h2>
-        <button class="btn sec sm" id="addItem" style="flex:0 0 auto">+ เพิ่มสินค้า</button>
+        <h2 style="margin:0">📦 สต็อกสินค้า</h2>
+        <button class="btn sec sm" id="addItem" style="flex:0 0 auto">＋ เพิ่มสินค้า</button>
       </div>
     </div>
 
     <div class="card">
-      <h2>เพิ่มหลายรายการเร็ว ๆ</h2>
+      <h2>⚡ เพิ่มหลายรายการเร็ว ๆ</h2>
       <div class="hint">พิมพ์ชื่อผลไม้ บรรทัดละ 1 อย่าง • ใส่ <b>ราคา/โล</b> และ <b>โล/ลัง</b> ต่อท้ายได้ (คั่นด้วย , )<br>ตัวอย่าง&nbsp;&nbsp;<code>ปลามะเพียน, 48, 25</code></div>
       <textarea id="bulkText" rows="5" placeholder="ต้าลิน, 37&#10;ปลามะเพียน, 48, 25&#10;กิมจูยอด, 45&#10;รอง, 23, 10&#10;มัดกำลัง, 100, 1"></textarea>
       <button class="btn sec" id="bulkAdd" style="margin-top:8px">เพิ่มทั้งหมด</button>
@@ -153,7 +231,7 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
   <!-- ============ สรุป ============ -->
   <section class="screen" id="s-sum">
     <div class="card">
-      <h2>สรุปยอดขาย</h2>
+      <h2>📊 สรุปยอดขาย</h2>
       <div class="seg" id="segMode">
         <button data-v="day" class="on">รายวัน</button><button data-v="month">รายเดือน</button><button data-v="year">รายปี</button>
       </div>
@@ -165,17 +243,17 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
     </div>
 
     <div class="card" id="cardByGroup">
-      <h2 id="byGroupTitle">แยกตามรอบ / ปลายทาง</h2>
+      <h2 id="byGroupTitle">🚚 แยกตามรอบ / ปลายทาง</h2>
       <table id="sumGroup"><tbody></tbody></table>
     </div>
 
     <div class="card">
-      <h2>แยกตามสินค้า</h2>
+      <h2>🍎 แยกตามสินค้า</h2>
       <table id="sumProd"><tbody></tbody></table>
     </div>
 
     <div class="card" id="cardDue">
-      <h2>ค้างชำระ</h2>
+      <h2>⏳ ค้างชำระ</h2>
       <div id="dueList"></div>
     </div>
   </section>
@@ -183,7 +261,7 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
   <!-- ============ ตั้งค่า ============ -->
   <section class="screen" id="s-set">
     <div class="card">
-      <h2>เชื่อมต่อ Google Sheet (ใช้หลายเครื่อง)</h2>
+      <h2>🔗 เชื่อมต่อ Google Sheet (ใช้หลายเครื่อง)</h2>
       <label>API URL (Apps Script Web App)</label>
       <input id="cfgUrl" placeholder="https://script.google.com/macros/s/..../exec">
       <label>PIN (ถ้าตั้งไว้)</label>
@@ -195,7 +273,7 @@ dialog::backdrop{background:rgba(0,0,0,.4)}
     </div>
 
     <div class="card">
-      <h2>ข้อมูล</h2>
+      <h2>💾 ข้อมูล</h2>
       <div class="muted" id="lastSync">โหมด: เก็บในเครื่อง</div>
       <button class="btn ghost" id="reloadAll" style="margin-top:10px">โหลดข้อมูลใหม่</button>
       <button class="btn ghost" id="pushLocal" style="margin-top:8px">อัปโหลดข้อมูลในเครื่อง → Google Sheet</button>
@@ -274,6 +352,12 @@ const nowIso   = () => { const d=new Date(); return todayStr()+'T'+p2(d.getHours
 const money = n => (Math.round(n*100)/100).toLocaleString('th-TH',{maximumFractionDigits:2});
 const kg    = n => (Math.round(n*100)/100).toLocaleString('th-TH',{maximumFractionDigits:2});
 const esc = s => String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+function ava(name){
+  const t=String(name||'?').trim(); let h=0;
+  for(let i=0;i<t.length;i++) h=(h*31+t.charCodeAt(i))>>>0;
+  const H=h%360;
+  return `<div class="ava" style="background:linear-gradient(135deg,hsl(${H} 70% 56%),hsl(${(H+28)%360} 72% 47%))">${esc(t.slice(0,1)||'?')}</div>`;
+}
 
 /* localStorage that never throws (private mode / data: URLs / blocked storage) */
 const LS = (()=>{
@@ -575,16 +659,17 @@ function renderStock(){
   w.innerHTML=DB.stock.map(s=>{
     const lang=num(s['คงเหลือลัง']),kilo=num(s['คงเหลือโล']);
     const low=(num(s['ขั้นต่ำลัง'])>0&&lang<=num(s['ขั้นต่ำลัง']))||(num(s['ขั้นต่ำโล'])>0&&kilo<=num(s['ขั้นต่ำโล']));
-    return `<div class="item">
+    return `<div class="prow">
+      ${ava(s['รายการ'])}
       <div class="grow">
         <div class="name">${esc(s['รายการ'])} ${low?'<span class="pill low">ใกล้หมด</span>':''}</div>
         <div class="sub">คงเหลือ <b>${kg(lang)}</b> ลัง • <b>${kg(kilo)}</b> โล · ราคา ${money(num(s['ราคาต่อโล']))}/โล</div>
       </div>
-      <div class="right" style="display:flex;gap:5px;flex-wrap:wrap;justify-content:flex-end">
-        <button class="btn sec sm" data-in="${s.id}">รับเข้า</button>
-        <button class="btn ghost sm" data-out="${s.id}">ตัดออก</button>
-        <button class="btn ghost sm" data-edit="${s.id}">แก้ไข</button>
-      </div>
+    </div>
+    <div class="pacts">
+      <button class="btn sec sm" data-in="${s.id}">＋ รับเข้า</button>
+      <button class="btn ghost sm" data-out="${s.id}">－ ตัดออก</button>
+      <button class="btn ghost sm" data-edit="${s.id}">✎ แก้ไข</button>
     </div>`;
   }).join('');
   w.querySelectorAll('[data-edit]').forEach(b=>b.onclick=()=>openItem(b.dataset.edit));
@@ -712,7 +797,7 @@ function renderSumBody(){
   $('#sumHead').querySelector('tbody').innerHTML=`
     <tr><td>ยอดขายรวม</td><td class="big" style="font-size:17px">${money(sales)}</td></tr>
     ${costRow}
-    <tr class="tot"><td>กำไร</td><td style="color:var(--primary)">${money(profit)}</td></tr>
+    <tr class="tot"><td>กำไร</td><td style="color:var(--green-d)">${money(profit)}</td></tr>
     <tr><td>จำนวนบิล</td><td>${bills}</td></tr>
     <tr><td>ค้างชำระ (${dueBills} บิล)</td><td style="color:var(--warn)">${money(dueAmt)}</td></tr>`;
   const ec=$('#editCost'); if(ec) ec.onclick=()=>openCost(sumPeriod, num(cost));
