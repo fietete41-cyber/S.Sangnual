@@ -16,6 +16,7 @@
   --bg:#fff8f0; --card:#ffffff; --ink:#26201a; --muted:#927c69;
   --line:#f2e6d8; --line2:#e9d8c4;
   --green:#1FA65A; --green-d:#127a41; --green-soft:#e6f7ee;
+  --brand-1:#1FA65A; --brand-2:#16b06a; --brand-3:#0EA59B;
   --mango:#FB8B24; --mango-d:#dd7410; --mango-soft:#fff0df;
   --berry:#EA3E5C; --berry-soft:#ffe7ea;
   --lemon:#FFC633;
@@ -31,7 +32,7 @@ body{font-family:'Sarabun',-apple-system,'Segoe UI',sans-serif;background:var(--
 
 header{position:sticky;top:0;z-index:20;color:#fff;display:flex;align-items:center;gap:11px;
   padding:calc(env(safe-area-inset-top) + 14px) 16px 15px;
-  background:linear-gradient(135deg,#1FA65A 0%,#16b06a 45%,#0EA59B 100%);
+  background:linear-gradient(135deg,var(--brand-1) 0%,var(--brand-2) 45%,var(--brand-3) 100%);
   border-radius:0 0 22px 22px;box-shadow:0 8px 22px rgba(20,120,66,.28)}
 .brandmark{width:40px;height:40px;border-radius:12px;background:#fff;display:grid;place-items:center;font-size:21px;flex:0 0 auto;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.16)}
 .brandmark img{width:100%;height:100%;object-fit:contain;display:block}
@@ -65,7 +66,7 @@ code{background:var(--mango-soft);padding:2px 6px;border-radius:6px;font-size:12
 .row{display:flex;gap:9px}.row>*{flex:1;min-width:0}
 
 .btn{display:flex;align-items:center;justify-content:center;gap:6px;width:100%;text-align:center;
-  background:linear-gradient(135deg,var(--green),#18b567);color:#fff;border:0;
+  background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;border:0;
   padding:14px;border-radius:13px;font-weight:800;font-size:16px;font-family:inherit;cursor:pointer;
   box-shadow:0 6px 16px rgba(31,166,90,.28);transition:transform .08s,box-shadow .15s,filter .15s;touch-action:manipulation}
 .btn:active{transform:translateY(1px) scale(.995);box-shadow:0 3px 10px rgba(31,166,90,.26)}
@@ -80,14 +81,19 @@ code{background:var(--mango-soft);padding:2px 6px;border-radius:6px;font-size:12
 .stat{flex:1;border-radius:var(--r);padding:14px;color:#fff;box-shadow:var(--sh);position:relative;overflow:hidden}
 .stat::after{content:"";position:absolute;right:-16px;top:-16px;width:66px;height:66px;border-radius:50%;background:rgba(255,255,255,.15)}
 .stat-sales{background:linear-gradient(135deg,#FB8B24,#ff6a3c)}
-.stat-profit{background:linear-gradient(135deg,#1FA65A,#0EA59B)}
+.stat-profit{background:linear-gradient(135deg,var(--brand-1),var(--brand-3))}
 .stat-k{font-size:12px;opacity:.95;font-weight:700}
 .stat-v{font-size:23px;font-weight:800;margin-top:3px;letter-spacing:-.4px;font-variant-numeric:tabular-nums;position:relative}
 .stat-v small{font-size:13px;font-weight:700;opacity:.85}
 
 .seg{display:flex;gap:4px;background:#f6ede0;border-radius:12px;padding:4px}
 .seg button{flex:1;background:transparent;border:0;padding:9px 2px;font-family:inherit;font-size:12.5px;font-weight:700;color:var(--muted);border-radius:9px;cursor:pointer;white-space:nowrap;transition:all .15s}
-.seg button.on{background:linear-gradient(135deg,var(--green),#18b567);color:#fff;box-shadow:0 3px 9px rgba(31,166,90,.3)}
+.seg button.on{background:linear-gradient(135deg,var(--green),var(--green-d));color:#fff;box-shadow:0 3px 9px rgba(31,166,90,.3)}
+
+.swatches{display:flex;gap:11px;flex-wrap:wrap}
+.swatch{width:46px;height:46px;border-radius:13px;border:3px solid #fff;outline:2px solid var(--line2);cursor:pointer;box-shadow:var(--sh-sm);transition:transform .1s}
+.swatch:active{transform:scale(.94)}
+.swatch.on{outline:3px solid var(--ink)}
 
 .pill{display:inline-flex;align-items:center;font-size:11px;padding:2px 9px;border-radius:999px;background:var(--green-soft);color:var(--green-d);font-weight:800;vertical-align:middle}
 .pill.low{background:#ffe7ea;color:#c31d3b}
@@ -264,6 +270,21 @@ dialog[open]{animation:pop .18s ease-out}
   <!-- ============ ตั้งค่า ============ -->
   <section class="screen" id="s-set">
     <div class="card">
+      <h2>🔒 ล็อกด้วยรหัส</h2>
+      <div class="hint">ใช้ล็อกปุ่ม “แก้ทุน” ในหน้าสรุป — ตั้งว่างไว้ = ไม่ล็อก</div>
+      <label>รหัส (ตัวเลข 4 หลักขึ้นไป)</label>
+      <input id="lockPin" inputmode="numeric" type="password" placeholder="เช่น 1234">
+      <button class="btn" id="lockSave" style="margin-top:12px">บันทึกรหัส</button>
+      <button class="btn ghost" id="lockClear" style="margin-top:8px">ลบรหัส (ปลดล็อก)</button>
+      <div class="hint" id="lockStatus"></div>
+    </div>
+
+    <div class="card">
+      <h2>🎨 สีธีมแอป</h2>
+      <div class="swatches" id="swatches"></div>
+    </div>
+
+    <div class="card">
       <h2>🔗 เชื่อมต่อ Google Sheet (ใช้หลายเครื่อง)</h2>
       <label>API URL (Apps Script Web App)</label>
       <input id="cfgUrl" placeholder="https://script.google.com/macros/s/..../exec">
@@ -333,6 +354,15 @@ dialog[open]{animation:pop .18s ease-out}
   </div>
 </dialog>
 
+<dialog id="lockDlg">
+  <h2>🔒 ใส่รหัสเพื่อแก้ทุน</h2>
+  <input id="lockAsk" inputmode="numeric" type="password" placeholder="รหัส">
+  <div class="row" style="margin-top:14px">
+    <button class="btn ghost" id="lockAskCancel">ยกเลิก</button>
+    <button class="btn" id="lockAskOk">ปลดล็อก</button>
+  </div>
+</dialog>
+
 <dialog id="costDlg">
   <h2>ทุนของวันที่ <span id="costDate"></span></h2>
   <label>ทุนรวม (บาท)</label>
@@ -391,6 +421,56 @@ function setDot(s){ $('#dot').className='dot'+(s?' '+s:''); }
   im.addEventListener('error',fb);
   if(im.complete && im.naturalWidth===0) fb();
 })();
+
+/* ================= ธีมสี ================= */
+const THEMES={
+  green:{name:'เขียวสด', g:'#1FA65A', d:'#127a41', s:'#e6f7ee', b:['#1FA65A','#16b06a','#0EA59B']},
+  mango:{name:'ส้มมะม่วง', g:'#F5820A', d:'#c96700', s:'#fdefe0', b:['#F5820A','#FB8B24','#F26B1D']},
+  melon:{name:'แดงแตงโม', g:'#E23E4E', d:'#b3212f', s:'#ffe7e9', b:['#E23E4E','#F0506A','#D6304E']},
+  grape:{name:'ม่วงองุ่น', g:'#7C4DEF', d:'#5a2fc0', s:'#efe9ff', b:['#7C4DEF','#8B5CF6','#6D3BE0']},
+  sky:{name:'ฟ้าคราม', g:'#1E88D6', d:'#1361a3', s:'#e3f2fd', b:['#1E88D6','#2FA8E0','#1476C8']}
+};
+function applyTheme(key){
+  const t=THEMES[key]||THEMES.green, r=document.documentElement.style;
+  r.setProperty('--green',t.g); r.setProperty('--green-d',t.d); r.setProperty('--green-soft',t.s);
+  r.setProperty('--brand-1',t.b[0]); r.setProperty('--brand-2',t.b[1]); r.setProperty('--brand-3',t.b[2]);
+  const m=document.querySelector('meta[name=theme-color]'); if(m) m.content=t.b[0];
+}
+function renderSwatches(){
+  const cur=LS.getItem('sk_theme')||'green';
+  $('#swatches').innerHTML=Object.entries(THEMES).map(([k,t])=>
+    `<button class="swatch ${k===cur?'on':''}" data-t="${k}" style="background:${t.g}" title="${esc(t.name)}" aria-label="${esc(t.name)}"></button>`).join('');
+  $$('#swatches [data-t]').forEach(b=>b.onclick=()=>{
+    LS.setItem('sk_theme',b.dataset.t); applyTheme(b.dataset.t); renderSwatches(); toast('เปลี่ยนสีธีมแล้ว');
+  });
+}
+
+/* ================= ล็อกด้วยรหัส ================= */
+const lockPin = () => LS.getItem('sk_lockpin')||'';
+let lockCb=null;
+function askPin(cb){
+  if(!lockPin()){ cb(); return; }
+  lockCb=cb; $('#lockAsk').value=''; $('#lockDlg').showModal();
+  setTimeout(()=>$('#lockAsk').focus(),40);
+}
+function renderLock(){
+  $('#lockPin').value='';
+  $('#lockStatus').textContent = lockPin()
+    ? '🔒 ตั้งรหัสไว้แล้ว — “แก้ทุน” ต้องใส่รหัส'
+    : 'ยังไม่ได้ตั้งรหัส — “แก้ทุน” เปิดได้เลย';
+}
+$('#lockSave').onclick=()=>{
+  const v=$('#lockPin').value.trim();
+  if(!/^\d{4,}$/.test(v)){ toast('ใส่ตัวเลขอย่างน้อย 4 หลัก',true); return; }
+  LS.setItem('sk_lockpin',v); toast('บันทึกรหัสแล้ว'); renderLock();
+};
+$('#lockClear').onclick=()=>{ LS.removeItem('sk_lockpin'); toast('ลบรหัสแล้ว — ปลดล็อก'); renderLock(); };
+$('#lockAskCancel').onclick=()=>{ lockCb=null; $('#lockDlg').close(); };
+$('#lockAskOk').onclick=()=>{
+  if($('#lockAsk').value.trim()===lockPin()){ const cb=lockCb; lockCb=null; $('#lockDlg').close(); if(cb) cb(); }
+  else toast('รหัสไม่ถูกต้อง',true);
+};
+$('#lockAsk').addEventListener('keydown',e=>{ if(e.key==='Enter'){ e.preventDefault(); $('#lockAskOk').click(); } });
 
 /* ================= config ================= */
 (function(){
@@ -816,7 +896,7 @@ function renderSumBody(){
     <tr class="tot"><td>กำไร</td><td style="color:var(--green-d)">${money(profit)}</td></tr>
     <tr><td>จำนวนบิล</td><td>${bills}</td></tr>
     <tr><td>ค้างชำระ (${dueBills} บิล)</td><td style="color:var(--warn)">${money(dueAmt)}</td></tr>`;
-  const ec=$('#editCost'); if(ec) ec.onclick=()=>openCost(sumPeriod, num(cost));
+  const ec=$('#editCost'); if(ec) ec.onclick=()=>askPin(()=>openCost(sumPeriod, num(cost)));
 
   // by group (round · dest)
   const g={};
@@ -873,6 +953,7 @@ $('#costSave').onclick=async ()=>{
 
 /* ================= SETTINGS ================= */
 function renderSettings(){
+  renderLock(); renderSwatches();
   const c=cfg();
   $('#cfgUrl').value=c.url; $('#cfgPin').value=c.pin;
   const s=LS.getItem('sk_sync');
@@ -932,6 +1013,7 @@ $$('#nav button').forEach(b=>b.onclick=()=>{
 });
 
 (function init(){
+  applyTheme(LS.getItem('sk_theme')||'green');
   try{ DB=JSON.parse(LS.getItem('sk_cache'))||DB; }catch(e){}
   if(!connected()) DB=loadLocal();
   cart=[blank()];
