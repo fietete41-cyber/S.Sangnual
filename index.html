@@ -369,6 +369,7 @@ let DB = { stock:[], sales:[], costs:[] };
 let _uidN = 0;
 const uid = pre => pre + Date.now().toString(36) + (_uidN++).toString(36);
 let cart = [];
+let pendingLine = null;   // ดัชนีรายการในบิลที่กำลังรอสินค้าใหม่จากป๊อปอัป
 let sumMode = 'day', sumPeriod = todayStr();
 let toastT;
 
@@ -553,16 +554,14 @@ $('#lines').addEventListener('input',e=>{
   if(!cart[i].touched){ const a=box.querySelector('[data-f="amount"]'); if(a) a.value=money(c.amount); }
   updateBillTot();
 });
-$('#lines').addEventListener('change',async e=>{
+$('#lines').addEventListener('change',e=>{
   const i=e.target.dataset.i,f=e.target.dataset.f; if(i==null)return;
   if(f==='name' && e.target.value==='__new__'){
-    const name=(prompt('ชื่อสินค้าใหม่')||'').trim();
-    cart[i].name='';
-    if(name){
-      try{ if(!stockByName(name)) await Store.saveItem({'รายการ':name,'โลต่อลัง':25}); cart[i].name=name; toast('เพิ่ม “'+name+'” แล้ว'); renderAll(); return; }
-      catch(err){ toast(err.message,true); }
-    }
-    renderLines(); return;
+    cart[+i].name='';
+    renderLines();
+    pendingLine=+i;
+    openItem('');            // เปิดป๊อปอัปเพิ่มสินค้าในแอป (ไม่ใช้ prompt ของเบราว์เซอร์)
+    return;
   }
   cart[i][f]=e.target.value;
   if(f==='name') renderLines();
@@ -678,7 +677,7 @@ function renderStock(){
 }
 function openItem(id){
   const s=id?DB.stock.find(x=>String(x.id)===String(id)):null;
-  $('#itemTitle').textContent=s?'แก้ไขสินค้า':'เพิ่มสินค้า';
+  $('#itemTitle').textContent=s?'แก้ไขสินค้า':(pendingLine!=null?'เพิ่มสินค้าใหม่':'เพิ่มสินค้า');
   $('#iId').value=s?s.id:'';
   $('#iName').value=s?s['รายการ']:'';
   $('#iLang').value=s?num(s['คงเหลือลัง']):0;
@@ -690,7 +689,9 @@ function openItem(id){
   $('#iMinKilo').value=s?num(s['ขั้นต่ำโล']):0;
   $('#iDelete').style.display=s?'block':'none';
   $('#itemDlg').showModal();
+  if(!s) setTimeout(()=>$('#iName').focus(),40);
 }
+$('#itemDlg').addEventListener('close',()=>{ if(pendingLine!=null){ pendingLine=null; renderLines(); } });
 $('#addItem').onclick=()=>openItem('');
 $('#bulkAdd').onclick=async ()=>{
   const lines=$('#bulkText').value.split('\n').map(s=>s.trim()).filter(Boolean);
@@ -716,13 +717,17 @@ $('#bulkAdd').onclick=async ()=>{
 $('#iCancel').onclick=()=>$('#itemDlg').close();
 $('#iSave').onclick=async ()=>{
   const name=$('#iName').value.trim(); if(!name){ toast('ใส่ชื่อสินค้า',true); return; }
+  const btn=$('#iSave'); btn.disabled=true; btn.textContent='กำลังบันทึก...';
   try{
     await Store.saveItem({ id:$('#iId').value||undefined,'รายการ':name,
       'คงเหลือลัง':num($('#iLang').value),'คงเหลือโล':num($('#iKilo').value),
       'โลต่อลัง':num($('#iPerLang').value),'ราคาต่อโล':num($('#iPrice').value),'ทุนต่อโล':num($('#iCost').value),
       'ขั้นต่ำลัง':num($('#iMinLang').value),'ขั้นต่ำโล':num($('#iMinKilo').value) });
+    if(pendingLine!=null && cart[pendingLine]){ cart[pendingLine].name=name; }
+    pendingLine=null;
     $('#itemDlg').close(); toast('บันทึกแล้ว'); renderAll();
   }catch(e){ toast(e.message,true); }
+  btn.disabled=false; btn.textContent='บันทึก';
 };
 $('#iDelete').onclick=async ()=>{
   if(!confirm('ลบสินค้านี้?'))return;
