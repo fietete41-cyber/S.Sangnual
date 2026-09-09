@@ -94,7 +94,8 @@ function idxByName(a, name) { for (var i = 0; i < a.length; i++) if (String(a[i]
 /* ---------------- actions ---------------- */
 function listAll() {
   return {
-    stock: rows(SH.stock, STOCK_H).filter(function (r) { return String(r.id) !== ''; }),
+    stock: rows(SH.stock, STOCK_H).filter(function (r) { return String(r.id) !== ''; })
+                                  .map(function (r) { r['อัปเดตล่าสุด'] = toIso(r['อัปเดตล่าสุด']); return r; }),
     sales: rows(SH.sales, SALES_H).filter(function (r) { return String(r.billId) !== ''; })
                                   .map(function (r) { r['วันที่เวลา'] = toIso(r['วันที่เวลา']); return r; }),
     costs: rows(SH.cost, COST_H).filter(function (r) { return String(r['วันที่']) !== ''; })
